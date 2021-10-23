@@ -26,4 +26,7 @@ print("%.3f" % result)
 print("%.2f" % result)
 print("%.1f" % result)
 print("%.0f" % result)
+#fix2
+#fix2
+#fix2
 #fix
