@@ -26,10 +26,10 @@ import cv2
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()
 
-faceCascade = cv2.CascadeClassifier("learn_project\haarcascade_frontalface_default.xml")
-eyeCascade = cv2.CascadeClassifier("learn_project\haarcascade_eye_tree_eyeglasses.xml")
-mouthCascade = cv2.CascadeClassifier("learn_project/Mouth.xml")
-glasses = cv2.imread("learn_project\images\glasses.png")
+faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+eyeCascade = cv2.CascadeClassifier("haarcascade_eye_tree_eyeglasses.xml")
+mouthCascade = cv2.CascadeClassifier("Mouth.xml")
+glasses = cv2.imread("images\glasses.png")
 # noseCascade = cv2.CascadeClassifier("learn_project/Nariz.xml")
 def draw_boundary(img, classifier, scaleFacetor, minNeighbors, color, text):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -51,8 +51,6 @@ original_glasses_h, original_glasses_w, glasses_channels = glasses.shape
 glasses_gray = cv2.cvtColor(glasses, cv2.COLOR_BGR2GRAY)
 ret, original_mask = cv2.threshold(glasses_gray, 10, 255, cv2.THRESH_BINARY_INV)
 original_mask_inv = cv2.bitwise_not(original_mask)
-# cap.set(cv2.CAP_PROP_FRAME_WIDTH, 960)
-# cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 540)
 while True:
     ret, frame = cap.read()
     frame = detect(frame, faceCascade, eyeCascade, mouthCascade)
