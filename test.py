@@ -23,6 +23,3 @@ for i in range(block):
     result += deltax * fx(x)
     x += deltax
 print("%.3f" % result)
-print("%.2f" % result)
-print("%.1f" % result)
-print("%.0f" % result)
