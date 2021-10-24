@@ -2,10 +2,13 @@ import numpy as np
 
 '''สร้าง array'''
 
-arr = np.array([[[1, 2, 3], [7, 8, 9]], [[4, 5, 6], [10, 11, 12]]])
+# มิติของ array ดูได้จาก [ ข้างหน้าว่ามีกี่ตัว
+arr1 = np.array([1, 2, 3]) # array 1 มิติ
+arr2 = np.array([[1, 2, 3], [4, 5, 6]]) # array 2 มิติ
+arr = np.array([[[1, 2, 3], [7, 8, 9]], [[4, 5, 6], [10, 11, 12]]]) # array 3 มิติ
 print(arr)
 print(arr[0][0][2])  # ระบุตำแหน่งสมาชิกที่ต้องการนำมาใช้งาน (index)
-print(arr.ndim)
+print(arr.ndim) # เช็คมิติของ array
 
 # ใส่ dtype="int" ระบุชนิดข้อมูลใน array ได้
 # np.zeros(ขนาด) สร้าง matrix 0
