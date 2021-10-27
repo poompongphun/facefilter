@@ -1,5 +1,4 @@
 import cv2
-import math as m
 
 img1 = cv2.imread('image/BTsample1.jpg')
 img2 = img1
