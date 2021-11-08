@@ -3,17 +3,20 @@ import math
 
 import numpy as np
 from typing import Optional
-from fastapi import FastAPI, File, UploadFile, Response
+from fastapi import FastAPI, File, UploadFile, Response, HTTPException
 app = FastAPI()
 
 @app.post("/")
 async def read_root(img: UploadFile = File(...), debug: Optional[str] = None):
     contents = await img.read()
-    nparr = np.fromstring(contents, np.uint8)
-    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-    clearAcne(img, str(debug).lower() == "true")
-    img_byte = bytes(cv2.imencode('.png', img)[1])
-    return Response(content=img_byte, media_type="image/webp")
+    if contents:
+        nparr = np.fromstring(contents, np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        clearAcne(img, str(debug).lower() == "true")
+        img_byte = bytes(cv2.imencode('.png', img)[1])
+        return Response(content=img_byte, media_type="image/webp")
+    else:
+        raise HTTPException(status_code=400, detail="Please select images")
 
 def getAvgColor(img, position, rlong, num, channel):
     """get average color""" # this function you can fix point in circle for avg !!
