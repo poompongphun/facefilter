@@ -12,11 +12,35 @@ async def read_root(img: UploadFile = File(...), debug: Optional[str] = None):
     if contents:
         nparr = np.fromstring(contents, np.uint8)
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        clearAcne(img, str(debug).lower() == "true")
-        img_byte = bytes(cv2.imencode('.png', img)[1])
+        img_byte = bytes(cv2.imencode('.png', clearAcne(img, str(debug).lower() == "true"))[1])
         return Response(content=img_byte, media_type="image/webp")
     else:
         raise HTTPException(status_code=400, detail="Please select images")
+
+def clearAcne(img, debug=False):
+    """checkposition"""
+    acne_cascade = cv2.CascadeClassifier('cascade/cascade.xml')
+    gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    mask = np.zeros_like(img)
+    faceDetected, rejectLevels, levelWeights = acne_cascade.detectMultiScale3(gray_img, 4, 3, outputRejectLevels = 1)
+    margin = 15 # margin between detect and remove
+    for i in range(len(faceDetected)):
+        (x, y, w, h) = faceDetected[i] # face position
+        if levelWeights[i] >= 1 and w <= 30: # check confidence
+            posi_x, posi_y, rad = x + (w//2), y + (h//2), w//2 # this position use for clear ance
+            cv2.circle(mask, (posi_x, posi_y), w - margin, (255, 255, 255), -1)
+            # BGR = tuple(getAvgColor(img, (posi_x, posi_y), rad - margin, 8, i) for i in range(3)) # this line return BGR Color (0, 0, 0)
+            # cv2.circle(img, (posi_x, posi_y), rad - margin, BGR, -1) # use circle to replace avg color!
+    removed_acne = cv2.inpaint(img, cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY), 3, cv2.INPAINT_NS)
+    # if you want to debug -> Ctrl + /
+    if debug:
+        for i in range(len(faceDetected)):
+            (x, y, w, h) = faceDetected[i]
+            color = (255, 0, 0) if levelWeights[i] >= 1 and w <= 30 else (0, 0, 255)
+            cv2.rectangle(removed_acne, (x, y), (x + w, y + h), color, 2)
+            cv2.putText(removed_acne, "Cfd: %.5f" % levelWeights[i], (x, y-5), cv2.FONT_ITALIC, 0.3, color, 1)
+            cv2.putText(removed_acne, "Wdt: %d" % w, (x, y + h + 10), cv2.FONT_ITALIC, 0.3, color, 1)
+    return removed_acne
 
 def getAvgColor(img, position, rlong, num, channel):
     """get average color""" # this function you can fix point in circle for avg !!
@@ -30,23 +54,9 @@ def getAvgColor(img, position, rlong, num, channel):
         degree += step
     return sum(all_color) // num
 
-def clearAcne(img, debug=False):
-    """checkposition"""
-    acne_cascade = cv2.CascadeClassifier('cascade/cascade.xml')
-    gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    faceDetected, rejectLevels, levelWeights = acne_cascade.detectMultiScale3(gray_img, 4, 3, outputRejectLevels = 1)
-    margin = 1 # margin between detect and remove
-    for i in range(len(faceDetected)):
-        (x, y, w, h) = faceDetected[i] # face position
-        if levelWeights[i] >= 1: # check confidence
-            posi_x, posi_y, rad = x + (w//2), y + (h//2), w//2 # this position use for clear ance
-            BGR = tuple(getAvgColor(img, (posi_x, posi_y), rad - margin, 8, i) for i in range(3)) # this line return BGR Color (0, 0, 0)
-            cv2.circle(img, (posi_x, posi_y), rad - margin, BGR, -1) # use circle to replace avg color!
-    # if you want to debug -> Ctrl + /
-    if debug:
-        for i in range(len(faceDetected)):
-            (x, y, w, h) = faceDetected[i]
-            color = (255, 0, 0) if levelWeights[i] >= 1 else (0, 0, 255)
-            cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
-            cv2.putText(img, "%.5f" % levelWeights[i], (x, y-5), cv2.FONT_ITALIC, 0.5, color, 1)
-
+# img1 = cv2.imread('image/sample2.png')
+# img2 = img1.copy()
+# cv2.imshow('Before', img2)
+# cv2.imshow('After', clearAcne(img1, True))
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
