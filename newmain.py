@@ -11,10 +11,10 @@ def checkposition(event, x, y, flags, param):
         cv2.circle(mask, (x, y), rad - 1, (255, 255, 255), -1)
         cv2.circle(img1, (x, y), rad - 1, (0, 0, 0), -1)
         cv2.imshow('test' ,img1)
-        #cv2.imshow('mask', mask)
+        cv2.imshow('mask', mask)
 
 cv2.imshow('test', img1)
-#cv2.imshow('mask', mask)
+cv2.imshow('mask', mask)
 cv2.setMouseCallback('test', checkposition)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
