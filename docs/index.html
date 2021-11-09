@@ -7,21 +7,18 @@
     <title>Photo Retouch</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        body{
-            font-family: 'Kanit', sans-serif;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="Logo.PNG"/>
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body style="height: 1500px;">
-    <nav class="navbar navbar-expand-sm navbar-light fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: white;">
         <div class="container-fluid ps-5">
             <img src="Logo.PNG" alt="" width="45"></img>
-            <a class="navbar-brand ps-3" href="#"><b>PhotoRetouch</b></a>
+            <a class="navbar-brand ps-2" href="#" style="font-weight: 800;">PhotoRetouch</a>
             <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarToggle">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -36,6 +33,16 @@
                 </ul>
             </div>
         </div>
+        <div class="d-flex" style="margin-right: 20px;">
+            <a class="nav-link" href="https://github.com/poompongphun/facefilter"><i class="bi bi-github" style="font-size: 25px; color: black;"></i></a>
+        </div>
     </nav>
+    <div class="container" style="margin-top: 200px !important; width:100%; max-width: 500px;">
+        <div class="d-flex flex-column">
+            <!-- <div class=""> -->
+            <input class="btn btn-light p-5" value="Drop your image here or browse." style="color: gray; font-weight: 500;"></input>
+            <button type="button" class="btn btn-dark">Submit</button>
+        </div>
+    </div>
 </body>
 </html>
