@@ -3,10 +3,31 @@ import math
 
 import numpy as np
 from typing import Optional
-from fastapi import FastAPI, File, UploadFile, Response, HTTPException
-app = FastAPI()
+from fastapi import FastAPI, File, UploadFile, Response, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 
-@app.post("/")
+app = FastAPI()
+origins = ["*"]
+
+app.mount("/static", StaticFiles(directory="docs/static"), name="static")
+templates = Jinja2Templates(directory="docs")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/", response_class=HTMLResponse)
+async def read_item(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
+@app.post("/acne")
 async def read_root(img: UploadFile = File(...), debug: Optional[str] = None):
     contents = await img.read()
     if contents:
