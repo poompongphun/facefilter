@@ -1,4 +1,4 @@
-cv2==4.5.4.58
+opencv-python==4.5.4.58
 numpy==1.21.4
 fastapi==0.70.0
 uvicorn==0.15.0
