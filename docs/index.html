@@ -46,7 +46,7 @@
                     style="font-size: 25px; color: black;"></i></a>
         </div>
     </nav>
-    <div class="container" style="margin-top: 200px !important; width:100%; max-width: 450px; height: 600px;">
+    <div class="container" style="margin-top: 200px; width:100%; max-width: 450px; height: 600px;">
         <div class="d-flex flex-column"
             style="box-shadow: 0 10px 10px -2px rgba(163, 163, 163, 0.8); border-radius: 25px 25px 25px 25px;">
             <div class="card text-center" id="clickArea"
@@ -68,6 +68,21 @@
             </div>
             <input type="file" id="uploadFile" accept="image/*" style="display:none">
             <button type="button" class="btn btn-dark" id="submitImg" style="border-radius: 0px 0px 25px 25px;" disabled>Submit</button>
+        </div>
+    </div>
+    <div class="container-fluid" style="width:100%; max-width: 450px; height: 200px;">
+        <div class="card" style="border-radius: 25px 25px 25px 25px; border-color: rgba(163, 163, 163, 0); box-shadow: 0 10px 10px -2px rgba(163, 163, 163, 0.8);">
+            <div class="card-header text-center" style="border-radius: 25px 25px 0px 0px;">config</div>
+            <div class="card-body">
+                <div class="form-check form-switch text-">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Debug Mode</label>
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                </div>
+                <div class="d-flex flex-row justify-content-center">
+                    <input class="ps-2 m-2" placeholder="Confidense">
+                    <input class="ps-2 m-2" placeholder="Size">
+                </div>
+            </div>
         </div>
     </div>
     <div class="container text-center">
