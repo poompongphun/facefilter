@@ -28,17 +28,17 @@ async def read_item(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.post("/acne")
-async def read_root(img: UploadFile = File(...), debug: Optional[str] = None):
+async def read_root(img: UploadFile = File(...), debug: Optional[bool] = False, conf: Optional[float] = 1, width: Optional[int] = 30):
     contents = await img.read()
     if contents:
         nparr = np.fromstring(contents, np.uint8)
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        img_byte = bytes(cv2.imencode('.png', clearAcne(img, str(debug).lower() == "true"))[1])
+        img_byte = bytes(cv2.imencode('.png', clearAcne(img, debug, conf, width))[1])
         return Response(content=img_byte, media_type="image/webp")
     else:
         raise HTTPException(status_code=400, detail="Please select images")
 
-def clearAcne(img, debug=False):
+def clearAcne(img, debug=False, conf=1, width=30):
     """checkposition"""
     acne_cascade = cv2.CascadeClassifier('cascade/cascade.xml')
     gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -47,7 +47,7 @@ def clearAcne(img, debug=False):
     margin = 15 # margin between detect and remove
     for i in range(len(faceDetected)):
         (x, y, w, h) = faceDetected[i] # face position
-        if levelWeights[i] >= 1 and w <= 30: # check confidence
+        if levelWeights[i] >= conf and w <= width: # check confidence
             posi_x, posi_y, rad = x + (w//2), y + (h//2), w//2 # this position use for clear ance
             cv2.circle(mask, (posi_x, posi_y), w - margin, (255, 255, 255), -1)
             # BGR = tuple(getAvgColor(img, (posi_x, posi_y), rad - margin, 8, i) for i in range(3)) # this line return BGR Color (0, 0, 0)
@@ -57,7 +57,7 @@ def clearAcne(img, debug=False):
     if debug:
         for i in range(len(faceDetected)):
             (x, y, w, h) = faceDetected[i]
-            color = (255, 0, 0) if levelWeights[i] >= 1 and w <= 30 else (0, 0, 255)
+            color = (255, 0, 0) if levelWeights[i] >= conf and w <= width else (0, 0, 255)
             cv2.rectangle(removed_acne, (x, y), (x + w, y + h), color, 2)
             cv2.putText(removed_acne, "Cfd: %.5f" % levelWeights[i], (x, y-5), cv2.FONT_ITALIC, 0.3, color, 1)
             cv2.putText(removed_acne, "Wdt: %d" % w, (x, y + h + 10), cv2.FONT_ITALIC, 0.3, color, 1)
