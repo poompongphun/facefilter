@@ -2,7 +2,7 @@ body{
     font-family: 'Kanit', sans-serif;
 }
 
-.nav-toggle-button{
+.navbar-toggler:focus{
     border-color: white;
 }
 
@@ -22,4 +22,20 @@ body{
 .form-control:focus{
     border-color: gray !important;
     box-shadow: 0 0 0 3px rgba(158, 158, 158, 0.25) !important;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+text-decoration: none;
+}
+
+a:hover {
+text-decoration: underline;
+}
+
+a:active {
+text-decoration: underline;
 }

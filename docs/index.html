@@ -19,7 +19,6 @@
         rel="stylesheet">
     <link rel="icon" type="image/png" href="static/img/Logo.PNG" />
     <link rel="stylesheet" href="static/stylesheet.css">
-
 </head>
 
 <body onscroll="shadow()">
@@ -27,7 +26,7 @@
         <div class="container-fluid ps-5">
             <img src="static/img/Logo.PNG" alt="" width="45"></img>
             <a class="navbar-brand ps-2" href="#" style="font-weight: 800;">PhotoRetouch</a>
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarToggle">
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarToggle" style="border-color: white;">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
@@ -72,10 +71,10 @@
     </div>
     <div class="container-fluid mt-2" style="width:100%; max-width: 450px;">
         <div class="card" style="border-radius: 25px 25px 25px 25px; border-color: rgba(163, 163, 163, 0); box-shadow: 0 10px 10px -2px rgba(163, 163, 163, 0.8);">
-            <div class="card-header text-center" style="border-radius: 25px 25px 0px 0px;">config</div>
+            <div class="card-header text-center" style="border-radius: 25px 25px 0px 0px; background-color: white;">config</div>
             <div class="card-body">
                 <div class="form-check form-switch" style="margin-right: 20px;">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Debug Mode</label>
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Show Detected</label>
                     <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
                 </div>
                 <div class="d-flex flex-row justify-content-center">
@@ -85,25 +84,27 @@
             </div>
         </div>
     </div>
-    <div class="container text-center" style="margin-top: 150px;" id="Howtouse">
+    <div class="container" style="height: 150px;" id="Howtouse">
+    </div>
+    <div class="container text-center">
         <h1 style="font-weight: 600;">How to use</h1>
         <div class="row justify-content-center mt-5">
             <div class="col-md-4">
-                <div class="card" style="width: 100%; border-color: rgba(163, 163, 163, 0)">
+                <div class="card" style="width: 100%; border-color: rgba(163, 163, 163, 0); margin-top: 20px;">
                     <h5 class="card-title" style="font-weight: 600;">Step 1</h5>
                     <i class="bi bi-upload" style="font-size: 55px;"></i>
                     upload your image
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card" style="width: 100%; border-color: rgba(163, 163, 163, 0)">
+                <div class="card" style="width: 100%; border-color: rgba(163, 163, 163, 0); margin-top: 20px;">
                     <h5 class="card-title" style="font-weight: 600;">Step 2</h5>
                     <i class="bi bi-magic" style="font-size: 55px;"></i>
                     Retouch your photos automatically
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card" style="width: 100%; border-color: rgba(163, 163, 163, 0)">
+                <div class="card" style="width: 100%; border-color: rgba(163, 163, 163, 0); margin-top: 20px;">
                     <h5 class="card-title" style="font-weight: 600;">Step 3</h5>
                     <i class="bi bi-image" style="font-size: 55px;"></i>
                     Download your image and Ready to use!
@@ -111,27 +112,54 @@
             </div>
         </div>
     </div>
-    <div class="container text-center" style="margin-top: 100px;">
-        <h1 style="font-weight: 600;" id="Meettheteam">Meet the Team</h1>
+    <div class="container" id="Meettheteam" style="height: 100px;"></div>
+    <div class="container text-center">
+        <h1 style="font-weight: 600;">Meet the Team</h1>
         <p class="fs-4">Introducing our amazing team.</p>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-5" style="margin-top: 20px;">
             <div class="col-md-3">
-                <img class="img-fluid" src="..." style="border-radius: 50;">
-                <p>
-
-                </p>
+                <div class="row justify-content-center">
+                    <img class="img-fluid rounded-circle" src="..." style="width: 200px;">
+                </div>
+                <div class="row justify-content-center">
+                    <a href="https://github.com/professorkong" style="margin-top: 20px; color: black;">
+                        <b>KONGPOB ONTONG</b>
+                    </a>
+                    <p>64070004</p>
+                </div>
             </div>
-            <div class="col-md-3">
-                <img src="...">
-
+            <div class="col-md-3" style="margin-top: 20px;">
+                <div class="row justify-content-center">
+                    <img class="img-fluid rounded-circle" src="static/img/chu.jpg" style="width: 200px;">
+                </div>
+                <div class="row justify-content-center">
+                    <a href="https://github.com/chulnwza" style="margin-top: 20px; color: black;">
+                        <b>CHAYATORN CHUON</b>
+                    </a>
+                    <p>64070019</p>
+                </div>
             </div>
-            <div class="col-md-3">
-                <img src="...">
-
+            <div class="col-md-3" style="margin-top: 20px;">
+                <div class="row justify-content-center">
+                    <img class="img-fluid rounded-circle" src="..." style="width: 200px;">
+                </div>
+                <div class="row justify-content-center">
+                    <a href="https://github.com/poompongphun" style="margin-top: 20px; color: black;">
+                        <b>PONGPHUN SAKDASAWIT</b>
+                    </a>
+                    <p>64070067</p>
+                </div>
             </div>
-            <div class="col-md-3">
-                <img src="...">
-
+            <div class="col-md-3" style="margin-top: 20px;">
+                <div class="row justify-content-center">
+                    <img class="img-fluid rounded-circle" src="static/img/fayce.jpg" style="width: 200px;">
+                </div>
+                <div class="row justify-content-center">
+                    <a href="https://github.com/YolradeeIT" style="margin-top: 20px; color: black;">
+                        <b>YOLRADEE PRAYOONPUNRATN</b>
+                    </a>
+                    <p>64070089</p>
+                </div>
             </div>
         </div>
     </div>
