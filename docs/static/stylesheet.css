@@ -6,10 +6,6 @@ body{
     border-color: white;
 }
 
-.form-check-input::before{
-    color: gray;
-}
-
 .form-check-input:focus{
     border-color: gray;
     box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25) !important;
