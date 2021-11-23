@@ -1,3 +1,24 @@
 body{
     font-family: 'Kanit', sans-serif;
 }
+
+.nav-toggle-button{
+    border-color: white;
+}
+
+.form-check-input::before{
+    color: gray;
+}
+
+.form-check-input:focus{
+    border-color: gray;
+    box-shadow: 0 0 0 0.2rem rgba(158, 158, 158, 0.25) !important;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='gray'/></svg>") !important;
+}
+
+.form-check-input:checked{
+    background-color: black;
+    border-color: black;
+    box-shadow: black;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='white'/></svg>") !important;
+}
