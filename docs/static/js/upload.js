@@ -3,6 +3,9 @@ const clickArea = document.getElementById("clickArea");
 const submitBtn = document.getElementById("submitImg");
 const dropText = document.getElementById("dropText");
 const preImg = document.getElementById("imgPreview");
+const debugSwt = document.getElementById("flexSwitchCheckDefault")
+const confInput = document.getElementById("confInput")
+const widthInput = document.getElementById("widthInput")
 let tmpFile = null;
 let beforeImg = null;
 
@@ -42,7 +45,12 @@ submitBtn.onclick = async () => {
     let dataImg = new FormData();
     dataImg.append("img", tmpFile);
     try {
-      const imgResponse = await fetch("acne?debug=true", {
+      const debug = debugSwt.checked
+      const parseConf = parseFloat(confInput.value)
+      const conf = parseConf < 1 ? confInput.value : parseConf || 1
+      const parseWid = parseFloat(widthInput.value)
+      const width = parseWid < 1 ? widthInput.value : parseWid || 30
+      const imgResponse = await fetch(`acne?debug=${debug}&conf=${conf}&width=${width}`, {
         method: "post",
         body: dataImg,
       });
