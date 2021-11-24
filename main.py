@@ -40,16 +40,16 @@ async def read_root(img: UploadFile = File(...), debug: Optional[bool] = False, 
 
 def clearAcne(img, debug=False, conf=1, width=30):
     """checkposition"""
-    acne_cascade = cv2.CascadeClassifier('cascade/cascade.xml')
+    acne_cascade = cv2.CascadeClassifier('cascade/5000cascade.xml')
     gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     mask = np.zeros_like(img)
     faceDetected, rejectLevels, levelWeights = acne_cascade.detectMultiScale3(gray_img, 4, 3, outputRejectLevels = 1)
-    margin = 15 # margin between detect and remove
+    margin = 5 # margin between detect and remove
     for i in range(len(faceDetected)):
         (x, y, w, h) = faceDetected[i] # face position
         if levelWeights[i] >= conf and w <= width: # check confidence
             posi_x, posi_y, rad = x + (w//2), y + (h//2), w//2 # this position use for clear ance
-            cv2.circle(mask, (posi_x, posi_y), w - margin, (255, 255, 255), -1)
+            cv2.circle(mask, (posi_x, posi_y), w//2 - margin, (255, 255, 255), -1)
             # BGR = tuple(getAvgColor(img, (posi_x, posi_y), rad - margin, 8, i) for i in range(3)) # this line return BGR Color (0, 0, 0)
             # cv2.circle(img, (posi_x, posi_y), rad - margin, BGR, -1) # use circle to replace avg color!
     removed_acne = cv2.inpaint(img, cv2.cvtColor(mask, cv2.COLOR_BGR2GRAY), 3, cv2.INPAINT_NS)
