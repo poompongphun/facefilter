@@ -16,11 +16,23 @@ def sharpness(imagepath, sharpn):
     """sharpness function"""
     img1 = Image.open(imagepath)
     enhancer = ImageEnhance.Sharpness(img1)
-    enhancer.enhance(sharpn).save('edit/output/2.jpg')
+    enhancer.enhance(sharpn).save('edit/output/sharpnesssample/10.jpg')
 
-# sharpness('edit/input/acne1.jpg', 3)
+# sharpness('edit/input/acne1.jpg', 10)
     # Sharpn
     # 0 : blurry
     # 1 : original image
     # 2 : increased sharpness
-    # 3 : increased more sharpness
+    # 3-n : increased more sharpness
+
+def brightness(imagepath, brightn=1):
+    """brightness function"""
+    img1 = Image.open(imagepath)
+    enhancer = ImageEnhance.Brightness(img1)
+    enhancer.enhance(brightn).save('edit/output/brightnesssample/2.jpg')
+
+#brightness('edit/input/acne1.jpg')
+
+# brightness
+    # brightn
+    # >= 1 : increased brightness
