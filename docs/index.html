@@ -50,6 +50,7 @@
             style="box-shadow: 0 10px 10px -2px rgba(163, 163, 163, 0.8); border-radius: 25px 25px 25px 25px;">
             <div class="card text-center" id="clickArea"
                 style="cursor: pointer; color: rgba(163, 163, 163, 0.8); font-weight: 500; height: 350px; border-radius: 25px 25px 0px 0px; border-color: rgba(163, 163, 163, 0);">
+                <!-- <div style="width: 30%; height: 30%; background-color: black; position: absolute; top: 0px;">s</div> -->
                 <div id="dropText" style="margin-top: 150px;">
                     <i class="bi bi-upload" style="font-size: 30px;"></i><br>
                     Drop your image here or browse.
@@ -66,7 +67,12 @@
                 </div>
             </div>
             <input type="file" id="uploadFile" accept="image/*" style="display:none">
-            <button type="button" class="btn btn-dark" id="submitImg" style="border-radius: 0px 0px 25px 25px;" disabled>Submit</button>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-dark" id="submitImg" style="border-radius: 0px 0px 0px 25px;" disabled>Submit</button>
+                <button type="button" class="btn btn-success" id="downloadBtn" style="border-radius: 0px 0px 25px 0px; max-width: 50px;" disabled>
+                    <i class="bi bi-download"></i><br>
+                </button>
+            </div>
         </div>
     </div>
     <div class="container-fluid mt-2" style="width:100%; max-width: 450px;">
