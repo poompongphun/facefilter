@@ -36,3 +36,11 @@ def brightness(imagepath, brightn=1):
 # brightness
     # brightn
     # >= 1 : increased brightness
+
+def contrast(imagepath, contrastn=1.5):
+    """contrast function"""
+    img1 = Image.open(imagepath)
+    enhancer = ImageEnhance.Contrast(img1)
+    enhancer.enhance(contrastn).save('edit/output/contrastsample/1.jpg')
+
+# contrast('edit/input/acne1.jpg')
