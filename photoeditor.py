@@ -1,6 +1,6 @@
 """edit photo"""
 
-from PIL import Image, ImageEnhance
+from PIL import Image, ImageEnhance, ImageFilter
 import os
 
 def formatindustry(path, lastnamefile):
@@ -44,3 +44,10 @@ def contrast(imagepath, contrastn=1.5):
     enhancer.enhance(contrastn).save('edit/output/contrastsample/1.jpg')
 
 # contrast('edit/input/acne1.jpg')
+
+def gaussianblur(imagepath, radi=2):
+    """gaussianblur function"""
+    img1 = Image.open(imagepath)
+    img1.filter(ImageFilter.GaussianBlur(radi)).save('edit/output/gaussianblursample/blur3.jpg')
+
+#gaussianblur('edit/input/pho1.jpg')
