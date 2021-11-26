@@ -13,7 +13,7 @@ def cropImg(img):
         cropped_image = img[y:y+h, x:x+w]
         cv2.imwrite('detected/%s%d.jpg' % (datetime.datetime.now().strftime("%f"), i), cropped_image)
 
-img1 = cv2.imread('image\sample2.png')
+img1 = cv2.imread('image\picture\istockphoto-174763312-612x612.jpg')
 if not pathlib.Path("detected").exists():
     print("No")
     os.mkdir("detected")
