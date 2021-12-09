@@ -12,70 +12,78 @@ let tmpFile = null;
 let beforeImg = null;
 let download = null;
 
+// click event in dropdown area
 clickArea.onclick = () => {
-  inputFile.click();
+  inputFile.click(); // click hidden file input
 };
 
+// drag something over dropdown area
 clickArea.ondragover = (ev) => {
-  ev.preventDefault();
+  ev.preventDefault(); // dont do anything
 };
 
+// drop something over dropdown area
 clickArea.ondrop = (ev) => {
-  ev.preventDefault();
-  previewImg(ev.dataTransfer.files[0]);
+  ev.preventDefault(); // dont do anything
+  previewImg(ev.dataTransfer.files[0]); // send file to preview
 };
 
+// hidden file input change value
 inputFile.onchange = function () {
-  previewImg(this.files[0]);
+  previewImg(this.files[0]); // send file to preview
 };
 
+// download button click
 downloadBtn.onclick = () => {
-  const a = document.createElement("a");
-  a.href = download;
-  a.download = "PhotoRetouch.png";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  const a = document.createElement("a"); // create new a element
+  a.href = download; // set link
+  a.download = "PhotoRetouch.png"; // set name
+  document.body.appendChild(a); // create a tag!!
+  a.click(); // then click for download!!
+  document.body.removeChild(a); // remove a tag
 };
 
+// preview image
 function previewImg(file) {
-  var reader = new FileReader();
-  reader.readAsDataURL(file);
-  tmpFile = file;
-  dropText.style.display = "none";
+  let reader = new FileReader(); // new file reader
+  reader.readAsDataURL(file); // convert file to url
+  tmpFile = file; // keep file to tmp
+  dropText.style.display = "none"; // hide "Drop your image here or browse." text
   reader.onload = () => {
-    preImg.src = reader.result;
-    submitBtn.disabled = false;
+    preImg.src = reader.result; // set src to show image
+    submitBtn.disabled = false; // enable submit button
   };
 }
 
+// submit button click
 submitBtn.onclick = async () => {
-  if (submitBtn.innerHTML == "Clear") {
+  if (submitBtn.innerHTML == "Clear") { // if text in submit button is Clear then reset all
     reset();
   } else {
-    loading(true);
-    let dataImg = new FormData();
-    dataImg.append("img", tmpFile);
+    loading(true); // show loading effect
+    let dataImg = new FormData(); // new formdata
+    dataImg.append("img", tmpFile); // add file to key img
     try {
       const debug = debugSwt.checked;
       const parseConf = parseFloat(confInput.value);
-      const conf = parseConf < 1 ? confInput.value : parseConf || 1;
+      const conf = parseConf < 1 ? confInput.value : parseConf || 1; // if no confInput use default value
       const parseWid = parseFloat(widthInput.value);
-      const width = parseWid < 1 ? widthInput.value : parseWid || 30;
+      const width = parseWid < 1 ? widthInput.value : parseWid || 30; // if no widthInput use default value
       const imgResponse = await fetch(
         `acne?debug=${debug}&conf=${conf}&width=${width}`,
         {
           method: "post",
           body: dataImg,
         }
-      );
+      ); // send request to clear acne api
+      // delay 0.5 sec after request done
       setTimeout(async () => {
-        download = URL.createObjectURL(await imgResponse.blob());
-        preImg.src = download;
+        download = URL.createObjectURL(await imgResponse.blob()); // convert response image to url
+        preImg.src = download; // set response img to show in preview
         beforeImg = tmpFile;
         tmpFile = null;
-        loading(false);
-        if (imgResponse.status != 200)
+        loading(false); // hide loading effect
+        if (imgResponse.status != 200) // request status is not 200 will show alert error
           showAlrt("Failed", "alert-danger", "bi-x-circle-fill");
       }, 500);
     } catch (error) {
@@ -84,6 +92,7 @@ submitBtn.onclick = async () => {
   }
 };
 
+// loading effect
 function loading(state) {
   const myload = document.getElementById("loading");
   if (state) {
@@ -101,6 +110,7 @@ function loading(state) {
   }
 }
 
+// show alert
 showAlrt = (
   text = "Success",
   type = "alert-success",
@@ -114,6 +124,7 @@ showAlrt = (
   }, 2000);
 };
 
+// reset everything
 function reset() {
   tmpFile = null;
   beforeImg = null;
