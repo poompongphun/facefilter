@@ -2,6 +2,8 @@ import cv2
 import numpy as np
 import dlib
 
+# module สำหรับ การทำ virtual lips
+
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor("predictor/shape_predictor_68_face_landmarks.dat") #Eyes, Eyebrows, Nose, Lips/mouth, Jawline
 
@@ -46,7 +48,7 @@ while True:
         #img = cv2.rectangle(img, (x1, y1), (x2, y2), (255, 0, 0), 2)
         landmarks = predictor(grayscale, face) #find all landmarks
         pointlist = []
-        #draw
+        """draw"""
         for n in range(68):
             x = landmarks.part(n).x
             y = landmarks.part(n).y
