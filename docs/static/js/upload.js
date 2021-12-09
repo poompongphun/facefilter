@@ -7,9 +7,10 @@ const preImg = document.getElementById("imgPreview");
 const debugSwt = document.getElementById("flexSwitchCheckDefault");
 const confInput = document.getElementById("confInput");
 const widthInput = document.getElementById("widthInput");
+const cardAlrt = document.getElementById("showAlert");
 let tmpFile = null;
 let beforeImg = null;
-let download = null
+let download = null;
 
 clickArea.onclick = () => {
   inputFile.click();
@@ -70,10 +71,12 @@ submitBtn.onclick = async () => {
       );
       setTimeout(async () => {
         download = URL.createObjectURL(await imgResponse.blob());
-        preImg.src = download
+        preImg.src = download;
         beforeImg = tmpFile;
         tmpFile = null;
         loading(false);
+        if (imgResponse.status != 200)
+          showAlrt("Failed", "alert-danger", "bi-x-circle-fill");
       }, 500);
     } catch (error) {
       console.log(error);
@@ -94,13 +97,27 @@ function loading(state) {
     submitBtn.disabled = false;
     downloadBtn.disabled = false;
     submitBtn.innerHTML = "Clear";
+    showAlrt("Success ก็ไปตากสิ");
   }
 }
+
+showAlrt = (
+  text = "Success",
+  type = "alert-success",
+  icon = "bi-check-circle-fill"
+) => {
+  cardAlrt.classList.add(type);
+  cardAlrt.innerHTML = `<i class="bi ${icon}"></i> ${text}`;
+  cardAlrt.style.opacity = 100;
+  setTimeout(() => {
+    cardAlrt.style.opacity = 0;
+  }, 2000);
+};
 
 function reset() {
   tmpFile = null;
   beforeImg = null;
-  download = null
+  download = null;
   submitBtn.innerHTML = "Submit";
   submitBtn.disabled = true;
   downloadBtn.disabled = true;
