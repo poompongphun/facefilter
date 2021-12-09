@@ -3,6 +3,7 @@ import datetime
 import os
 import pathlib
 
+# Crop รูปภาพ
 def cropImg(img):
     """checkposition"""
     acne_cascade = cv2.CascadeClassifier('cascade/cascade.xml')

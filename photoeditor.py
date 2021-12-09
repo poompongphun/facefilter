@@ -3,6 +3,8 @@
 from PIL import Image, ImageEnhance, ImageFilter
 import os
 
+# module สำหรับการแต่งรูป
+
 def formatindustry(path, lastnamefile):
     """factory"""
     for item in os.listdir('%s' %path):
